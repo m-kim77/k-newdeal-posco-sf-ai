@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -32,18 +32,24 @@
         margin: 6px 0;
       }
     </style>
+    <!-- <script defer>
+      const button = document.querySelector("#myButton");
+      console.log(button.textContent);
+    </script> -->
   </head>
   <body>
     <h1>개념 01 — DOM 이란과 요소 선택</h1>
 
     <p class="guide">
-      이 파일을 더블클릭해서 브라우저로 열고, <strong>F12</strong> 를 눌러 개발자도구의
-      <strong>Console</strong> 탭을 함께 보세요. 코드의 결과가 거기에 찍힙니다.
-    
+      이 파일을 더블클릭해서 브라우저로 열고, <strong>F12</strong> 를 눌러
+      개발자도구의 <strong>Console</strong> 탭을 함께 보세요. 코드의 결과가
+      거기에 찍힙니다.
+
       <br /><br />
       <strong>HTML 과 CSS 는 몰라도 됩니다.</strong> 이 파일 위쪽의
-      <code>&lt;style&gt;</code> 과 <code>&lt;body&gt;</code> 는 화면 모양을 만드는 코드입니다.
-      이 자료에서는 가르치지 않습니다. <code>&lt;script&gt;</code> 안부터 읽으세요.
+      <code>&lt;style&gt;</code> 과 <code>&lt;body&gt;</code> 는 화면 모양을
+      만드는 코드입니다. 이 자료에서는 가르치지 않습니다.
+      <code>&lt;script&gt;</code> 안부터 읽으세요.
     </p>
 
     <div class="demo">
@@ -73,6 +79,7 @@
 
       // ── 섹션 1: document — 문서 전체를 가리키는 객체 ──
 
+      console.log("document.title : ", document.title);
       console.log(document.title);
       // 콘솔: 10단원 개념01 - DOM 이란과 요소 선택
       // head 안의 title 태그 내용입니다.
@@ -126,6 +133,10 @@
       // 콘솔: title
 
       // ✏️ 직접 해보기 2 — button 의 textContent 를 콘솔에 찍어 보세요.
+      // console.log("button.textContent :", button.textContent);
+      const button1 = document.querySelector("#myButton");
+      console.log(button1.textContent);
+      console.log(button1.id);
 
       // ── 섹션 3: 못 찾으면 null ──
 
@@ -135,6 +146,7 @@
 
       // null 에서 무언가를 꺼내려 하면 에러가 납니다. (07단원에서 봤죠)
       // console.log(notExist.textContent);
+      console.log(notExist?.textContent);
       // 실수: TypeError: Cannot read properties of null (reading 'textContent')
       //
       // "Cannot read properties of null" 은 DOM 을 다룰 때 가장 많이 보는 에러입니다.
@@ -150,6 +162,8 @@
 
       // ✏️ 직접 해보기 3 — ".없는클래스" 를 골라 보고, if 로 확인해서
       //                   있으면 "있음", 없으면 "없음" 을 콘솔에 찍어 보세요.
+      const none = document.querySelector(".없는클래스");
+      none ? console.log("있음") : console.log("없음");
 
       // ── 섹션 4: querySelectorAll — 전부 고르기 ──
 
@@ -194,6 +208,10 @@
       // 콘솔: ['첫 번째 상자', '두 번째 상자', '세 번째 상자']
 
       // ✏️ 직접 해보기 4 — 모든 .box 의 글자를 forEach 로 콘솔에 찍어 보세요.
+      const boxes_forEach = document.querySelectorAll(".box");
+      boxes_forEach.forEach((box) =>
+        console.log("box.textContent :", box.textContent),
+      );
 
       // ── 섹션 5: getElementById — 옛날 방식 ──
 
@@ -212,6 +230,11 @@
 
       // ✏️ 직접 해보기 5 — 같은 버튼을 getElementById 와 querySelector 로 각각 고른 뒤,
       //                   === 로 비교한 결과를 콘솔에 찍어 보세요. (아이디는 myButton)
+      const buttonById = document.getElementById("myButton");
+      const buttonByQuery = document.querySelector("#myButton");
+
+      console.log(buttonById === buttonByQuery);
+      /// true
 
       // ── 섹션 6: 선택자 더 써 보기 ──
 
@@ -229,6 +252,9 @@
 
       // ✏️ 직접 해보기 6 — .demo 안에 있는 button 을 선택자 하나로 골라
       //                   textContent 를 콘솔에 찍어 보세요.
+      const demoButton = document.querySelector(".demo button");
+      console.log("demoButton.textContent", demoButton.textContent);
+      // demoButton.textContent 버튼
 
       // ── 섹션 7: script 를 어디에 둘 것인가 ──
 
