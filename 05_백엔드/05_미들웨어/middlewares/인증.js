@@ -44,7 +44,9 @@ function 역할확인(...허용역할들) {
     }
 
     if (!허용역할들.includes(req.user.role)) {
-      return next(HttpError(403, `${허용역할들.join(" 또는 ")} 만 할 수 있습니다`));
+      return next(
+        HttpError(403, `${허용역할들.join(" 또는 ")} 만 할 수 있습니다`),
+      );
     }
 
     next();

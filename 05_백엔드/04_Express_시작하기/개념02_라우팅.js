@@ -165,9 +165,9 @@ app.get("/reports{/:year}", (req, res) => {
 
 // 이것도 Express 5 에서 문법이 바뀌었습니다.
 
-app.get("/files/*splat", (req, res) => {
-  res.json({ 조각들: req.params.splat });
-});
+// app.get("/files/*splat", (req, res) => {
+//   res.json({ 조각들: req.params.splat });
+// });
 
 // 확인: GET /files/2026/03/보고서.pdf
 // 응답: 200 {"조각들":["2026","03","보고서.pdf"]}
@@ -312,18 +312,41 @@ app.listen(PORT, () => {
 //
 // ✏️ 직접 해보기 1 — /equipments/:id/logs 라우트를 만들어
 //                    req.params 를 그대로 돌려주게 해 보세요.
+app.get("/equipments/:id/logs", (req, res) => {
+  res.json(req.params.id);
+});
+
 //
 // ✏️ 직접 해보기 2 — 섹션 2 의 라우트를 고쳐서, id 를 숫자로 바꾼 결과와
 //                    타입을 함께 돌려주게 해 보세요.
 //                      { 원본: "12", 숫자: 12, 타입: "number" }
+app.get("/documents_2/:id", (req, res) => {
+  res.json({
+    원본: req.params.id,
+    숫자: Number(req.params.id),
+    타입: typeof req.params.id,
+  });
+});
 //
 // ✏️ 직접 해보기 3 — /files/*splat 에 아주 긴 경로를 넣어 보세요.
 //                    http://localhost:3000/files/a/b/c/d/e
 //                    배열이 몇 개짜리로 나오나요?
+app.get("/files/*splat", (req, res) => {
+  res.json({
+    조각들: req.params.splat,
+    배열길이: req.params.splat.length,
+  });
+});
+
 //
 // ✏️ 직접 해보기 4 — app.get("/files/*", ...) 로 고쳐서 다시 켜 보세요.
 //                    어떤 에러가 나나요? 어디를 고치라고 알려 주나요?
 //                    (확인했으면 반드시 되돌리세요)
+// app.get("/files/*", (req, res) => {
+//   res.json(req.params.id);
+// });
+// PathError [TypeError]: Missing parameter name at index 8: /files/*; visit https://git.new/pathToRegexpError for info
+// 파라메터 없음
 
 // ── 자주 하는 실수 ──
 
